@@ -60,6 +60,6 @@ In the cluster, Snellius scrapes the controller Pods on port 9092 and reads Envo
 | You see | Check |
 |---|---|
 | "No kgateway install found" | The controller Deployment has both labels above, its image is named `kgateway`, and the UI's ServiceAccount can list Deployments. |
-| Your kgateway controller runs a custom build under another image name | Set `installs.classOnly=true`. Snellius then shows the controller from its GatewayClass and Gateway API status, without the kgateway-specific checks. |
+| Your kgateway controller runs a custom build under another image name | Set `installs.classOnly=true`. Snellius then adds an install for its GatewayClass `controllerName`, from Gateway API status only: no version, processes or kgateway-specific checks. It does so only when no detected install already uses that `controllerName`. |
 | A check reads "not available" | The finding page says why: a chart toggle is off, RBAC denies the read, or the network blocks the port. |
 | Counts lower than you expect | The controller's `discoveryNamespaceSelectors`. Snellius counts only the namespaces the controller watches. |

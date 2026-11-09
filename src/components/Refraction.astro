@@ -10,6 +10,9 @@ const answers = [
   { color: "#11C9BB", exit: [212, 175.5], title: "What does each Gateway manage?", text: "Listeners, routes and proxies, with counts that should agree." },
   { color: "#FFE42A", exit: [235, 215.5], title: "What do I fix?", text: "Each finding has a stable code, its evidence and a fix." },
 ];
+// Static geometry measured at 1440px, so the diagram reads without JavaScript; the script refines it.
+const beam = ["27.6%", "49.9%", "38.8%", "49.9%"];
+const rays = [["43.2%", "43%", "61.6%", "11.5%"], ["43.8%", "45.8%", "61.6%", "37.2%"], ["44.9%", "50.8%", "61.6%", "62.8%"], ["45.7%", "54.7%", "61.6%", "88.5%"]];
 // The observation circle's centre, and the outward offset past the triangle's white stroke.
 const circle = [54, 164];
 const stroke = [5.2, -3];
@@ -25,8 +28,8 @@ const stroke = [5.2, -3];
   <div class="prism"><img src={symbol.src} alt="" width="112" height="112" /></div>
   <div class="gap"></div>
   <svg class="light" aria-hidden="true" data-circle={circle.join(",")} data-stroke={stroke.join(",")}>
-    <line class="beam" pathLength="1" />
-    {answers.map((a) => <line class="ray" stroke={a.color} pathLength="1" data-exit={a.exit.join(",")} />)}
+    <line class="beam" pathLength="1" x1={beam[0]} y1={beam[1]} x2={beam[2]} y2={beam[3]} />
+    {answers.map((a, i) => <line class="ray" stroke={a.color} pathLength="1" data-exit={a.exit.join(",")} x1={rays[i][0]} y1={rays[i][1]} x2={rays[i][2]} y2={rays[i][3]} />)}
   </svg>
   <ul class="answers">
     {answers.map((a) => (
