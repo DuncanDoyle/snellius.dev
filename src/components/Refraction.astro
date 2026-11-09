@@ -3,14 +3,16 @@
 import symbol from "../assets/brand/snellius-symbol-dark.svg";
 
 const sources = ["Gateway API resources and status", "kgateway policies", "Controller metrics", "Proxy and pod signals"];
+// Colours and exit points are the logo's own bands: where each band meets the prism's right edge, in its 256-unit viewBox.
 const answers = [
-  { color: "var(--blue)", title: "Is each install healthy?", text: "One health state, with problems ranked by severity." },
-  { color: "var(--cyan)", title: "Why isn't this route attached?", text: "Computed with kgateway's rules and checked against its status." },
-  { color: "var(--teal)", title: "What does each Gateway manage?", text: "Listeners, routes and proxies, with counts that should agree." },
-  { color: "var(--gold)", title: "What do I fix?", text: "Each finding has a stable code, its evidence and a fix." },
+  { color: "#0789D2", exit: [166.5, 96], title: "Is each install healthy?", text: "One health state, with problems ranked by severity." },
+  { color: "#0FB8F1", exit: [183.5, 124.5], title: "Why isn't this route attached?", text: "Computed with kgateway's rules and checked against its status." },
+  { color: "#11C9BB", exit: [212, 175.5], title: "What does each Gateway manage?", text: "Listeners, routes and proxies, with counts that should agree." },
+  { color: "#FFE42A", exit: [235, 215.5], title: "What do I fix?", text: "Each finding has a stable code, its evidence and a fix." },
 ];
-// Ray end heights, as a percentage of the diagram height.
-const ys = [12.5, 37.5, 62.5, 87.5];
+// The observation circle's centre, and the outward offset past the triangle's white stroke.
+const circle = [54, 164];
+const stroke = [5.2, -3];
 ---
 
 <div class="refr" data-reveal>
@@ -19,15 +21,13 @@ const ys = [12.5, 37.5, 62.5, 87.5];
     <h3>What Snellius reads</h3>
     <ul>{sources.map((s) => <li>{s}</li>)}</ul>
   </div>
-  <svg class="beam" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true">
-    <line x1="0" y1="5" x2="100" y2="5" />
-  </svg>
+  <div class="gap"></div>
   <div class="prism"><img src={symbol.src} alt="" width="112" height="112" /></div>
-  <div class="rays" aria-hidden="true">
-    <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-      {ys.map((y, i) => <line x1="0" y1="50" x2="100" y2={y} stroke={answers[i].color} />)}
-    </svg>
-  </div>
+  <div class="gap"></div>
+  <svg class="light" aria-hidden="true" data-circle={circle.join(",")} data-stroke={stroke.join(",")}>
+    <line class="beam" pathLength="1" />
+    {answers.map((a) => <line class="ray" stroke={a.color} pathLength="1" data-exit={a.exit.join(",")} />)}
+  </svg>
   <ul class="answers">
     {answers.map((a) => (
       <li style={`--ray:${a.color}`}>
@@ -39,6 +39,32 @@ const ys = [12.5, 37.5, 62.5, 87.5];
 </div>
 
 <script>
+  // Draw the light from the real layout: card edge to the observation circle, then each band's exit point to its answer.
+  function layout(root: HTMLElement) {
+    const svg = root.querySelector<SVGSVGElement>("svg.light");
+    const img = root.querySelector<HTMLImageElement>(".prism img");
+    const input = root.querySelector<HTMLElement>(".input");
+    const items = root.querySelectorAll<HTMLElement>(".answers li");
+    if (!svg || !img || !input || getComputedStyle(svg).display === "none") return;
+    const r = root.getBoundingClientRect(), m = img.getBoundingClientRect();
+    const at = (u: number, v: number) => [m.left - r.left + (m.width * u) / 256, m.top - r.top + (m.height * v) / 256];
+    const set = (l: Element, a: number[], b: number[]) =>
+      ["x1", "y1", "x2", "y2"].forEach((k, i) => l.setAttribute(k, String([...a, ...b][i])));
+    const [cu, cv] = svg.dataset.circle!.split(",").map(Number);
+    const [su, sv] = svg.dataset.stroke!.split(",").map(Number);
+    const c = at(cu, cv);
+    set(svg.querySelector(".beam")!, [input.getBoundingClientRect().right - r.left, c[1]], c);
+    svg.querySelectorAll<SVGLineElement>(".ray").forEach((l, i) => {
+      const [u, v] = l.dataset.exit!.split(",").map(Number);
+      const li = items[i].getBoundingClientRect();
+      set(l, at(u + su, v + sv), [li.left - r.left, li.top - r.top + li.height / 2]);
+    });
+  }
+  document.querySelectorAll<HTMLElement>(".refr").forEach((root) => {
+    new ResizeObserver(() => layout(root)).observe(root);
+    layout(root);
+  });
+
   const io = new IntersectionObserver((entries) => {
     for (const e of entries) if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
   }, { threshold: 0.35 });
@@ -53,29 +79,27 @@ const ys = [12.5, 37.5, 62.5, 87.5];
   .input .eyebrow { margin: 0 0 10px; }
   .input ul { margin: 10px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: 0.92rem; line-height: 1.7; }
 
-  /* The beam ends on the prism's observation circle, about 24px into its cell; the rays leave from the same point. */
-  .beam { width: calc(100% + 24px); height: 10px; margin-right: -24px; overflow: visible; }
-  .beam line { stroke: var(--text); stroke-width: 2.5; vector-effect: non-scaling-stroke; }
+  .refr { position: relative; }
   .prism { display: grid; place-items: center; position: relative; z-index: 1; }
   .prism img { transform: translateY(-16px); }
-  .rays { position: relative; align-self: stretch; margin-left: -88px; }
-  .rays svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-  .rays line { stroke-width: 2.5; vector-effect: non-scaling-stroke; }
+  .light { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+  .light line { stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 1; }
+  .light .beam { stroke: var(--text); }
 
   .answers { list-style: none; margin: 0; padding: 0; display: grid; grid-template-rows: repeat(4, 1fr); gap: 12px; }
   .answers li { position: relative; display: grid; align-content: center; padding: 14px 18px; border: 1px solid var(--rule); border-radius: 10px; background: var(--panel); }
   .answers li::after { content: ""; position: absolute; left: -5px; top: 50%; width: 9px; height: 9px; margin-top: -4.5px; border-radius: 50%; background: var(--ray); box-shadow: 0 0 0 3px var(--ink); }
   .answers p { margin: 4px 0 0; color: var(--muted); font-size: 0.92rem; line-height: 1.45; }
 
-  /* Beam first, then the rays fan out, once the diagram scrolls into view. */
-  .refr.js .beam, .refr.js .rays { clip-path: inset(0 100% 0 0); }
-  .refr.js.in .beam { clip-path: inset(-10px 0 -10px 0); transition: clip-path 400ms ease-out; }
-  .refr.js.in .rays { clip-path: inset(0 -40px 0 0); transition: clip-path 700ms 350ms cubic-bezier(.2,.7,.2,1); }
-  @media (prefers-reduced-motion: reduce) { .refr.js .beam, .refr.js .rays { clip-path: none; } }
+  /* Beam first, then the rays leave the prism, once the diagram scrolls into view. */
+  .refr.js .light line { stroke-dashoffset: 1; }
+  .refr.js.in .light .beam { stroke-dashoffset: 0; transition: stroke-dashoffset 400ms ease-out; }
+  .refr.js.in .light .ray { stroke-dashoffset: 0; transition: stroke-dashoffset 600ms 350ms cubic-bezier(.2,.7,.2,1); }
+  @media (prefers-reduced-motion: reduce) { .refr.js .light line { stroke-dashoffset: 0; } }
 
   @media (max-width: 860px) {
     .refr { grid-template-columns: minmax(0, 1fr); gap: 16px; }
-    .beam, .rays { display: none; }
+    .light, .gap { display: none; }
     /* One connector: from the cluster card down into the prism's circle, then through each answer. */
     .input { position: relative; }
     .input::after { content: ""; position: absolute; left: 16px; top: 100%; height: 62px; width: 2px; background: var(--text); }
