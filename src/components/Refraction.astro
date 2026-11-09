@@ -1,14 +1,13 @@
 ---
-// Refraction, as the logo draws it: one beam from the cluster enters the prism and fans out into four answers.
+// Refraction, as the logo draws it: the picture you see is white light, and the prism shows the four sources it is made of.
 import symbol from "../assets/brand/snellius-symbol-dark.svg";
 
-const sources = ["Gateway API resources and status", "kgateway policies", "Controller metrics", "Proxy and pod signals"];
 // Colours and exit points are the logo's own bands: where each band meets the prism's right edge, in its 256-unit viewBox.
-const answers = [
-  { color: "#0789D2", exit: [166.5, 96], title: "Is each install healthy?", text: "One health state, with problems ranked by severity." },
-  { color: "#0FB8F1", exit: [183.5, 124.5], title: "Why isn't this route attached?", text: "Computed with kgateway's rules and checked against its status." },
-  { color: "#11C9BB", exit: [212, 175.5], title: "What does each Gateway manage?", text: "Listeners, routes and proxies, with counts that should agree." },
-  { color: "#FFE42A", exit: [235, 215.5], title: "What do I fix?", text: "Each finding has a stable code, its evidence and a fix." },
+const sources = [
+  { color: "#0789D2", exit: [166.5, 96], title: "Resource status", text: "The conditions kgateway writes on Gateways, routes and policies." },
+  { color: "#0FB8F1", exit: [183.5, 124.5], title: "Computed attachment", text: "What Gateway API rules say should attach, checked against that status." },
+  { color: "#11C9BB", exit: [212, 175.5], title: "Controller metrics", text: "Config the proxies rejected, and what the controller built for each Gateway." },
+  { color: "#FFE42A", exit: [235, 215.5], title: "Proxy and pod signals", text: "Readiness, restarts, Warning Events and proxy stats." },
 ];
 // Static geometry measured at 1440px, so the diagram reads without JavaScript; the script refines it.
 const beam = ["27.6%", "49.9%", "38.8%", "49.9%"];
@@ -20,19 +19,19 @@ const stroke = [5.2, -3];
 
 <div class="refr" data-reveal>
   <div class="input">
-    <p class="eyebrow">Your cluster</p>
-    <h3>What Snellius reads</h3>
-    <ul>{sources.map((s) => <li>{s}</li>)}</ul>
+    <p class="eyebrow">The picture you see</p>
+    <h3>A health state per install</h3>
+    <p>Problems ranked by severity, each with a stable finding code, the evidence behind it and how to fix it.</p>
   </div>
   <div class="gap"></div>
   <div class="prism"><img src={symbol.src} alt="" width="112" height="112" /></div>
   <div class="gap"></div>
   <svg class="light" aria-hidden="true" data-circle={circle.join(",")} data-stroke={stroke.join(",")}>
     <line class="beam" pathLength="1" x1={beam[0]} y1={beam[1]} x2={beam[2]} y2={beam[3]} />
-    {answers.map((a, i) => <line class="ray" stroke={a.color} pathLength="1" data-exit={a.exit.join(",")} x1={rays[i][0]} y1={rays[i][1]} x2={rays[i][2]} y2={rays[i][3]} />)}
+    {sources.map((a, i) => <line class="ray" stroke={a.color} pathLength="1" data-exit={a.exit.join(",")} x1={rays[i][0]} y1={rays[i][1]} x2={rays[i][2]} y2={rays[i][3]} />)}
   </svg>
-  <ul class="answers">
-    {answers.map((a) => (
+  <ul class="sources">
+    {sources.map((a) => (
       <li style={`--ray:${a.color}`}>
         <h3>{a.title}</h3>
         <p>{a.text}</p>
@@ -42,12 +41,12 @@ const stroke = [5.2, -3];
 </div>
 
 <script>
-  // Draw the light from the real layout: card edge to the observation circle, then each band's exit point to its answer.
+  // Draw the light from the real layout: card edge to the observation circle, then each band's exit point to its source card.
   function layout(root: HTMLElement) {
     const svg = root.querySelector<SVGSVGElement>("svg.light");
     const img = root.querySelector<HTMLImageElement>(".prism img");
     const input = root.querySelector<HTMLElement>(".input");
-    const items = root.querySelectorAll<HTMLElement>(".answers li");
+    const items = root.querySelectorAll<HTMLElement>(".sources li");
     if (!svg || !img || !input || getComputedStyle(svg).display === "none") return;
     const r = root.getBoundingClientRect(), m = img.getBoundingClientRect();
     const at = (u: number, v: number) => [m.left - r.left + (m.width * u) / 256, m.top - r.top + (m.height * v) / 256];
@@ -80,7 +79,7 @@ const stroke = [5.2, -3];
 
   .input { padding: 22px; border: 1px solid var(--rule); border-radius: 12px; background: var(--panel); }
   .input .eyebrow { margin: 0 0 10px; }
-  .input ul { margin: 10px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: 0.92rem; line-height: 1.7; }
+  .input p:last-child { margin: 6px 0 0; color: var(--muted); font-size: 0.92rem; line-height: 1.45; }
 
   .refr { position: relative; }
   .prism { display: grid; place-items: center; position: relative; z-index: 1; }
@@ -89,10 +88,10 @@ const stroke = [5.2, -3];
   .light line { stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 1; }
   .light .beam { stroke: var(--text); }
 
-  .answers { list-style: none; margin: 0; padding: 0; display: grid; grid-template-rows: repeat(4, 1fr); gap: 12px; }
-  .answers li { position: relative; display: grid; align-content: center; padding: 14px 18px; border: 1px solid var(--rule); border-radius: 10px; background: var(--panel); }
-  .answers li::after { content: ""; position: absolute; left: -5px; top: 50%; width: 9px; height: 9px; margin-top: -4.5px; border-radius: 50%; background: var(--ray); box-shadow: 0 0 0 3px var(--ink); }
-  .answers p { margin: 4px 0 0; color: var(--muted); font-size: 0.92rem; line-height: 1.45; }
+  .sources { list-style: none; margin: 0; padding: 0; display: grid; grid-template-rows: repeat(4, 1fr); gap: 12px; }
+  .sources li { position: relative; display: grid; align-content: center; padding: 14px 18px; border: 1px solid var(--rule); border-radius: 10px; background: var(--panel); }
+  .sources li::after { content: ""; position: absolute; left: -5px; top: 50%; width: 9px; height: 9px; margin-top: -4.5px; border-radius: 50%; background: var(--ray); box-shadow: 0 0 0 3px var(--ink); }
+  .sources p { margin: 4px 0 0; color: var(--muted); font-size: 0.92rem; line-height: 1.45; }
 
   /* Beam first, then the rays leave the prism, once the diagram scrolls into view. */
   .refr.js .light line { stroke-dashoffset: 1; }
@@ -103,15 +102,15 @@ const stroke = [5.2, -3];
   @media (max-width: 860px) {
     .refr { grid-template-columns: minmax(0, 1fr); gap: 16px; }
     .light, .gap { display: none; }
-    /* One connector: from the cluster card down into the prism's circle, then through each answer. */
+    /* One connector: from the picture down into the prism's circle, then through each source. */
     .input { position: relative; }
     .input::after { content: ""; position: absolute; left: 16px; top: 100%; height: 62px; width: 2px; background: var(--text); }
     .prism { justify-items: start; margin-left: 2px; }
     .prism img { width: 72px; height: 72px; transform: none; }
-    .answers li { padding-left: 34px; }
-    .answers li::after { left: 12px; top: 22px; margin: 0; z-index: 1; }
-    .answers li::before { content: ""; position: absolute; left: 16px; top: -12px; bottom: 0; width: 2px; background: var(--ray); }
-    .answers li:first-child::before { top: -42px; }
-    .answers li:last-child::before { bottom: auto; height: 34px; }
+    .sources li { padding-left: 34px; }
+    .sources li::after { left: 12px; top: 22px; margin: 0; z-index: 1; }
+    .sources li::before { content: ""; position: absolute; left: 16px; top: -12px; bottom: 0; width: 2px; background: var(--ray); }
+    .sources li:first-child::before { top: -42px; }
+    .sources li:last-child::before { bottom: auto; height: 34px; }
   }
 </style>
