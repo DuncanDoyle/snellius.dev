@@ -20,15 +20,15 @@ const features = [
     title: "Know what's wrong first",
     text: "Each install gets one health state. Problems are ranked by severity, and each carries a stable finding code, its evidence and how to fix it.",
     shot: overviewFocus,
-    alt: "The Snellius health overview listing problems by severity, each with a KGWUI finding code",
+    alt: "The health overview: one error and one warning, each with a KGWUI finding code, and healthy controller and proxies",
     href: "/docs/health/",
   },
   {
     eyebrow: "Attachment",
-    title: "See why a route isn't attached",
+    title: "See why a route is or isn't attached",
     text: "Snellius works out which listeners should accept a route, and how delegation resolves. It shows that next to the controller's status, and says when the two disagree.",
     shot: route,
-    alt: "A route parent card: Accepted is False, and the computed outcome explains that no listener allows this route",
+    alt: "A route's parent card: the controller accepted it, and the computed outcome agrees on both listeners",
     href: "/docs/explore/",
   },
   {
@@ -36,7 +36,7 @@ const features = [
     title: "Every Gateway, listener and route",
     text: "Browse Gateways, ListenerSets and routes. Check listeners, proxies, conditions and what the controller built, and filter routes by status and reason.",
     shot: gateway,
-    alt: "A Gateway page: its proxy, and three listeners whose attached route counts agree with the computed counts",
+    alt: "A Gateway's listeners: both healthy, with attached route counts that agree with the computed counts",
     href: "/docs/explore/",
     wide: true,
   },
@@ -98,7 +98,7 @@ const features = [
           </div>
         </div>
         <div class="wrap shot-frame">
-          <Image src={overview} alt="The Snellius health overview for a kgateway install, with problems ranked by severity" widths={[800, 1280, 1600, 2400]} sizes="(max-width: 1212px) calc(100vw - 32px), 1180px" loading="eager" />
+          <Image src={overview} alt="The Snellius overview for a kgateway install: two problems that need attention, healthy processes, and counts of what it manages" widths={[800, 1280, 1600, 2400]} sizes="(max-width: 1212px) calc(100vw - 32px), 1180px" loading="eager" />
         </div>
       </section>
 
@@ -173,11 +173,11 @@ const features = [
   /* Survey construction lines, after the social banner: two hairlines and concentric circles. */
   .survey { position: absolute; inset: 0; pointer-events: none;
     background:
-      radial-gradient(circle at 78% 34%, transparent 0 229px, var(--line) 230px 231px, transparent 232px 299px, var(--line) 300px 301px, transparent 302px),
+      radial-gradient(circle at 83% 34%, transparent 0 229px, var(--line) 230px 231px, transparent 232px 299px, var(--line) 300px 301px, transparent 302px),
       linear-gradient(var(--line), var(--line)) 0 120px / 100% 1px no-repeat,
-      linear-gradient(var(--line), var(--line)) 78% 0 / 1px 100% no-repeat; }
-  .hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); align-items: center; gap: 32px; min-height: 440px; }
-  h1 { margin: 18px 0 20px; font: 800 clamp(2.8rem, 6.4vw, 5.2rem)/0.98 var(--display); letter-spacing: -0.045em; }
+      linear-gradient(var(--line), var(--line)) 83% 0 / 1px 100% no-repeat; }
+  .hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 0.4fr); align-items: center; gap: 24px; min-height: 440px; }
+  h1 { margin: 18px 0 20px; font: 800 clamp(2.6rem, 5.6vw, 4.6rem)/0.98 var(--display); letter-spacing: -0.045em; text-wrap: balance; }
   .lead { max-width: 36rem; margin: 0; font-size: 1.2rem; line-height: 1.55; color: #c6d3e0; }
   .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
   .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border-radius: 10px; border: 1px solid var(--rule); text-decoration: none; font-weight: 600; transition: background 120ms, transform 120ms; }
@@ -187,7 +187,7 @@ const features = [
   .btn.primary:hover { background: #7ae2f7; }
   .btn.primary:active { background: #2cc3e4; }
   .hero-mark { display: grid; place-items: center; }
-  .hero-mark img { width: min(320px, 70%); filter: drop-shadow(0 30px 60px rgb(14 165 233 / 0.18)); }
+  .hero-mark img { width: min(240px, 100%); filter: drop-shadow(0 30px 60px rgb(14 165 233 / 0.18)); }
   .shot-frame { position: relative; margin-top: 56px; padding: 10px; border: 1px solid var(--rule); border-radius: 16px 16px 0 0; border-bottom: 0; background: var(--navy); }
   .shot-frame :global(img) { border-radius: 8px 8px 0 0; }
 
@@ -231,6 +231,6 @@ const features = [
     .feature { gap: 28px; padding: 56px 0; }
     .feature.flip .feature-copy { order: 0; }
     .band { padding-top: 80px; }
-    .survey { background: linear-gradient(var(--line), var(--line)) 0 96px / 100% 1px no-repeat; }
+    .survey { background: linear-gradient(var(--line), var(--line)) 0 24px / 100% 1px no-repeat; }
   }
 </style>
