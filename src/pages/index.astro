@@ -3,7 +3,7 @@ import "../styles/fonts.css";
 import "../styles/site.css";
 import { Image } from "astro:assets";
 import InstallSnippet from "../components/InstallSnippet.astro";
-import Triangulation from "../components/Triangulation.astro";
+import Refraction from "../components/Refraction.astro";
 import symbol from "../assets/brand/snellius-symbol-dark.svg";
 import overview from "../assets/shots/overview-dark.png";
 import overviewFocus from "../assets/shots/overview-focus-dark.png";
@@ -104,9 +104,9 @@ const features = [
 
       <section class="band wrap" aria-labelledby="how">
         <p class="eyebrow">How it works</p>
-        <h2 id="how">Four observations, one answer</h2>
-        <p class="intro">Like its namesake's triangulation, Snellius takes readings from several points and works out where things stand. It reads the cluster through the Kubernetes API and never changes it.</p>
-        <Triangulation />
+        <h2 id="how">One cluster in, clear answers out</h2>
+        <p class="intro">A prism splits one beam of light into colours you can tell apart. Snellius does that to what your cluster reports: it separates it into answers you can act on. It reads through the Kubernetes API and never changes anything.</p>
+        <Refraction />
       </section>
 
       {features.map((f, i) => (

@@ -1,0 +1,90 @@
+---
+// Refraction, as the logo draws it: one beam from the cluster enters the prism and fans out into four answers.
+import symbol from "../assets/brand/snellius-symbol-dark.svg";
+
+const sources = ["Gateway API resources and status", "kgateway policies", "Controller metrics", "Proxy and pod signals"];
+const answers = [
+  { color: "var(--blue)", title: "Is each install healthy?", text: "One health state, with problems ranked by severity." },
+  { color: "var(--cyan)", title: "Why isn't this route attached?", text: "Computed with kgateway's rules and checked against its status." },
+  { color: "var(--teal)", title: "What does each Gateway manage?", text: "Listeners, routes and proxies, with counts that should agree." },
+  { color: "var(--gold)", title: "What do I fix?", text: "Each finding has a stable code, its evidence and a fix." },
+];
+// Ray end heights, as a percentage of the diagram height.
+const ys = [12.5, 37.5, 62.5, 87.5];
+---
+
+<div class="refr" data-reveal>
+  <div class="input">
+    <p class="eyebrow">Your cluster</p>
+    <h3>What Snellius reads</h3>
+    <ul>{sources.map((s) => <li>{s}</li>)}</ul>
+  </div>
+  <svg class="beam" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true">
+    <line x1="0" y1="5" x2="100" y2="5" />
+  </svg>
+  <div class="prism"><img src={symbol.src} alt="" width="112" height="112" /></div>
+  <div class="rays" aria-hidden="true">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+      {ys.map((y, i) => <line x1="0" y1="50" x2="100" y2={y} stroke={answers[i].color} />)}
+    </svg>
+  </div>
+  <ul class="answers">
+    {answers.map((a) => (
+      <li style={`--ray:${a.color}`}>
+        <h3>{a.title}</h3>
+        <p>{a.text}</p>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+  }, { threshold: 0.35 });
+  document.querySelectorAll("[data-reveal]").forEach((el) => { el.classList.add("js"); io.observe(el); });
+</script>
+
+<style>
+  .refr { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(32px, 0.3fr) 112px minmax(48px, 0.5fr) minmax(0, 1.25fr); align-items: center; }
+  h3 { margin: 0; font-size: 1rem; font-weight: 650; letter-spacing: -0.01em; }
+
+  .input { padding: 22px; border: 1px solid var(--rule); border-radius: 12px; background: var(--panel); }
+  .input .eyebrow { margin: 0 0 10px; }
+  .input ul { margin: 10px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: 0.92rem; line-height: 1.7; }
+
+  /* The beam ends on the prism's observation circle, about 24px into its cell; the rays leave from the same point. */
+  .beam { width: calc(100% + 24px); height: 10px; margin-right: -24px; overflow: visible; }
+  .beam line { stroke: var(--text); stroke-width: 2.5; vector-effect: non-scaling-stroke; }
+  .prism { display: grid; place-items: center; position: relative; z-index: 1; }
+  .prism img { transform: translateY(-16px); }
+  .rays { position: relative; align-self: stretch; margin-left: -88px; }
+  .rays svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .rays line { stroke-width: 2.5; vector-effect: non-scaling-stroke; }
+
+  .answers { list-style: none; margin: 0; padding: 0; display: grid; grid-template-rows: repeat(4, 1fr); gap: 12px; }
+  .answers li { position: relative; display: grid; align-content: center; padding: 14px 18px; border: 1px solid var(--rule); border-radius: 10px; background: var(--panel); }
+  .answers li::after { content: ""; position: absolute; left: -5px; top: 50%; width: 9px; height: 9px; margin-top: -4.5px; border-radius: 50%; background: var(--ray); box-shadow: 0 0 0 3px var(--ink); }
+  .answers p { margin: 4px 0 0; color: var(--muted); font-size: 0.92rem; line-height: 1.45; }
+
+  /* Beam first, then the rays fan out, once the diagram scrolls into view. */
+  .refr.js .beam, .refr.js .rays { clip-path: inset(0 100% 0 0); }
+  .refr.js.in .beam { clip-path: inset(-10px 0 -10px 0); transition: clip-path 400ms ease-out; }
+  .refr.js.in .rays { clip-path: inset(0 -40px 0 0); transition: clip-path 700ms 350ms cubic-bezier(.2,.7,.2,1); }
+  @media (prefers-reduced-motion: reduce) { .refr.js .beam, .refr.js .rays { clip-path: none; } }
+
+  @media (max-width: 860px) {
+    .refr { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+    .beam, .rays { display: none; }
+    /* One connector: from the cluster card down into the prism's circle, then through each answer. */
+    .input { position: relative; }
+    .input::after { content: ""; position: absolute; left: 16px; top: 100%; height: 62px; width: 2px; background: var(--text); }
+    .prism { justify-items: start; margin-left: 2px; }
+    .prism img { width: 72px; height: 72px; transform: none; }
+    .answers li { padding-left: 34px; }
+    .answers li::after { left: 12px; top: 22px; margin: 0; z-index: 1; }
+    .answers li::before { content: ""; position: absolute; left: 16px; top: -12px; bottom: 0; width: 2px; background: var(--ray); }
+    .answers li:first-child::before { top: -42px; }
+    .answers li:last-child::before { bottom: auto; height: 34px; }
+  }
+</style>
