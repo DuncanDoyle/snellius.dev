@@ -1,0 +1,27 @@
+/* Landing page tokens: the brand board's night palette, with survey hairlines. */
+:root {
+  --ink: #0e1726;
+  --navy: #0b2545;
+  --panel: #13203a;
+  --line: rgb(68 213 243 / 0.14);
+  --rule: #22344d;
+  --text: #e6eef5;
+  --muted: #9fb0c3;
+  --blue: #0ea5e9;
+  --cyan: #44d5f3;
+  --teal: #14b8a6;
+  --gold: #fbbf24;
+  --display: "Figtree Variable", system-ui, sans-serif;
+  --mono: "JetBrains Mono Variable", ui-monospace, monospace;
+  --wrap: min(1180px, calc(100% - 32px));
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--ink); }
+body { margin: 0; background: var(--ink); color: var(--text); font: 400 1.0625rem/1.6 var(--display); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+img { max-width: 100%; height: auto; display: block; }
+:focus-visible { outline: 2px solid rgb(230 238 245 / 0.7); outline-offset: 3px; border-radius: 4px; }
+.wrap { width: var(--wrap); margin-inline: auto; }
+.eyebrow { font: 500 0.78rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyan); }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }

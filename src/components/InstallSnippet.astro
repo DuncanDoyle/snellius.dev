@@ -1,0 +1,50 @@
+---
+// The two install commands, with a copy button for the whole block.
+const commands = [
+  "helm install ui oci://ghcr.io/duncandoyle/charts/snellius \\\n  -n snellius --create-namespace",
+  "kubectl -n snellius port-forward svc/ui-snellius 8080:80",
+];
+const text = commands.join("\n");
+---
+
+<div class="snippet">
+  <pre><code><span class="c"># Install the chart, then open http://localhost:8080</span>
+{commands.map((c) => <span class="cmd">{c}</span>)}</code></pre>
+  <button type="button" class="copy" data-copy={text} aria-label="Copy install commands">
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"></rect><path d="M5 15V5a1 1 0 0 1 1-1h9" fill="none" stroke="currentColor" stroke-width="1.8"></path></svg>
+    <span class="tip" role="status">Copy</span>
+  </button>
+</div>
+
+<script>
+  for (const btn of document.querySelectorAll<HTMLButtonElement>(".snippet .copy")) {
+    btn.addEventListener("click", async () => {
+      const tip = btn.querySelector(".tip");
+      try {
+        await navigator.clipboard.writeText(btn.dataset.copy ?? "");
+        if (tip) tip.textContent = "Copied";
+      } catch {
+        if (tip) tip.textContent = "Select the text to copy";
+      }
+      btn.classList.add("done");
+      setTimeout(() => {
+        btn.classList.remove("done");
+        if (tip) tip.textContent = "Copy";
+      }, 1800);
+    });
+  }
+</script>
+
+<style>
+  .snippet { position: relative; border: 1px solid var(--rule); border-radius: 10px; background: rgb(11 37 69 / 0.55); }
+  pre { margin: 0; padding: 18px 56px 18px 20px; overflow-x: auto; font: 400 0.86rem/1.7 var(--mono); color: var(--text); }
+  .c { color: var(--muted); }
+  .cmd { display: block; }
+  .cmd::before { content: "$ "; color: var(--teal); }
+  .copy { position: absolute; top: 10px; right: 10px; width: 36px; height: 36px; display: grid; place-items: center; border-radius: 8px; border: 1px solid var(--rule); background: var(--ink); color: var(--muted); cursor: pointer; transition: background 120ms, color 120ms; }
+  .copy:hover { background: var(--panel); color: var(--text); }
+  .copy:active { transform: translateY(1px); background: var(--navy); }
+  .copy.done { color: var(--teal); }
+  .tip { position: absolute; right: 0; top: calc(100% + 6px); padding: 4px 8px; border-radius: 6px; background: var(--panel); border: 1px solid var(--rule); font: 500 0.75rem/1.2 var(--display); color: var(--text); white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 120ms; }
+  .copy:hover .tip, .copy:focus-visible .tip, .copy.done .tip { opacity: 1; }
+</style>

@@ -1,0 +1,236 @@
+---
+import "../styles/fonts.css";
+import "../styles/site.css";
+import { Image } from "astro:assets";
+import InstallSnippet from "../components/InstallSnippet.astro";
+import Triangulation from "../components/Triangulation.astro";
+import symbol from "../assets/brand/snellius-symbol-dark.svg";
+import overview from "../assets/shots/overview-dark.png";
+import overviewFocus from "../assets/shots/overview-focus-dark.png";
+import route from "../assets/shots/route-focus-dark.png";
+import gateway from "../assets/shots/gateway-focus-dark.png";
+
+const repo = "https://github.com/DuncanDoyle/snellius";
+const title = "Snellius: a read-only UI for kgateway";
+const description = "See whether each kgateway install is healthy, why a route is or isn't attached, and what every Gateway manages. One Helm chart, read-only access.";
+
+const features = [
+  {
+    eyebrow: "Health overview",
+    title: "Know what's wrong first",
+    text: "Each install gets one health state. Problems are ranked by severity, and each carries a stable finding code, its evidence and how to fix it.",
+    shot: overviewFocus,
+    alt: "The Snellius health overview listing problems by severity, each with a KGWUI finding code",
+    href: "/docs/health/",
+  },
+  {
+    eyebrow: "Attachment",
+    title: "See why a route isn't attached",
+    text: "Snellius works out which listeners should accept a route, and how delegation resolves. It shows that next to the controller's status, and says when the two disagree.",
+    shot: route,
+    alt: "A route parent card: Accepted is False, and the computed outcome explains that no listener allows this route",
+    href: "/docs/explore/",
+  },
+  {
+    eyebrow: "Explorer",
+    title: "Every Gateway, listener and route",
+    text: "Browse Gateways, ListenerSets and routes. Check listeners, proxies, conditions and what the controller built, and filter routes by status and reason.",
+    shot: gateway,
+    alt: "A Gateway page: its proxy, and three listeners whose attached route counts agree with the computed counts",
+    href: "/docs/explore/",
+    wide: true,
+  },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0e1726" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="canonical" href="https://snellius.dev/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content="https://snellius.dev/" />
+    <meta property="og:image" content="https://snellius.dev/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="top wrap">
+      <a class="brand" href="/" aria-label="Snellius home">
+        <img src={symbol.src} alt="" width="30" height="30" />
+        <span>snellius</span>
+      </a>
+      <nav aria-label="Main">
+        <a href="/docs/">Docs</a>
+        <a href="/docs/quick-start/">Quick start</a>
+        <a href="/docs/findings/">Findings</a>
+        <a class="gh" href={repo} aria-label="Snellius on GitHub">
+          <svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+          <span class="tip">GitHub</span>
+        </a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="survey" aria-hidden="true"></div>
+        <div class="wrap hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Read-only UI for kgateway</p>
+            <h1>See the whole picture.</h1>
+            <p class="lead">Snellius shows whether each kgateway install is healthy, why a route is or isn't attached, and what every Gateway manages. It installs with one Helm chart and only reads your cluster.</p>
+            <div class="ctas">
+              <a class="btn primary" href="/docs/quick-start/">Get started</a>
+              <a class="btn" href={repo}>View on GitHub</a>
+            </div>
+          </div>
+          <div class="hero-mark" aria-hidden="true">
+            <img src={symbol.src} alt="" width="320" height="320" />
+          </div>
+        </div>
+        <div class="wrap shot-frame">
+          <Image src={overview} alt="The Snellius health overview for a kgateway install, with problems ranked by severity" widths={[800, 1280, 1600, 2400]} sizes="(max-width: 1212px) calc(100vw - 32px), 1180px" loading="eager" />
+        </div>
+      </section>
+
+      <section class="band wrap" aria-labelledby="how">
+        <p class="eyebrow">How it works</p>
+        <h2 id="how">Four observations, one answer</h2>
+        <p class="intro">Like its namesake's triangulation, Snellius takes readings from several points and works out where things stand. It reads the cluster through the Kubernetes API and never changes it.</p>
+        <Triangulation />
+      </section>
+
+      {features.map((f, i) => (
+        <section class:list={["feature", "wrap", { flip: i % 2 === 1, wide: f.wide }]}>
+          <div class="feature-copy">
+            <p class="eyebrow">{f.eyebrow}</p>
+            <h2>{f.title}</h2>
+            <p>{f.text}</p>
+            <a class="more" href={f.href}>Read the guide <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="feature-shot">
+            <Image src={f.shot} alt={f.alt} widths={[640, 960, 1400, 2340]} sizes={f.wide ? "(max-width: 1212px) calc(100vw - 32px), 1180px" : "(max-width: 860px) calc(100vw - 32px), 680px"} />
+          </div>
+        </section>
+      ))}
+
+      <section class="facts wrap" aria-labelledby="trust">
+        <h2 id="trust" class="visually-hidden">Read-only by design</h2>
+        <div><h3>Only get, list and watch</h3><p>The ClusterRole grants read verbs only. Snellius never changes your cluster.</p></div>
+        <div><h3>Never reads Secrets</h3><p>Secrets, ConfigMaps and the proxy and port-forward subresources stay out of its RBAC.</p></div>
+        <div><h3>Private by default</h3><p>There is no login yet, so the chart exposes it through port-forward only. <a href="/docs/security/">Read the trust model</a>.</p></div>
+      </section>
+
+      <section class="install wrap" aria-labelledby="install">
+        <div>
+          <p class="eyebrow">Install</p>
+          <h2 id="install">Running in two commands</h2>
+          <p>Tested with kgateway 2.3, 2.4 and 2.5. You need Helm, kubectl and a cluster that runs kgateway.</p>
+          <a class="more" href="/docs/quick-start/">Quick start <span aria-hidden="true">→</span></a>
+        </div>
+        <InstallSnippet />
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div class="wrap foot-grid">
+        <div class="foot-brand">
+          <a class="brand" href="/"><img src={symbol.src} alt="" width="26" height="26" /><span>snellius</span></a>
+          <p>Open source under the Apache-2.0 licence. Named after <a href="https://en.wikipedia.org/wiki/Willebrord_Snellius">Willebrord Snellius</a> (1580–1626), pioneer of triangulation and of the law of refraction.</p>
+        </div>
+        <nav aria-label="Docs"><h3>Docs</h3><a href="/docs/quick-start/">Quick start</a><a href="/docs/install/">Install</a><a href="/docs/findings/">Finding codes</a><a href="/docs/security/">Security</a></nav>
+        <nav aria-label="Community"><h3>Community</h3><a href={repo}>Source code</a><a href={`${repo}/issues`}>Issues</a><a href={`${repo}/releases`}>Releases</a><a href="/docs/contributing/">Contributing</a></nav>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .skip { position: absolute; left: -9999px; }
+  .skip:focus { left: 16px; top: 12px; z-index: 10; padding: 8px 12px; background: var(--panel); border-radius: 6px; }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+
+  .top { display: flex; align-items: center; justify-content: space-between; height: 72px; position: relative; z-index: 2; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 750 1.35rem/1 var(--display); letter-spacing: -0.03em; }
+  nav[aria-label="Main"] { display: flex; align-items: center; gap: 4px; }
+  nav[aria-label="Main"] a { position: relative; padding: 8px 12px; border-radius: 8px; text-decoration: none; color: var(--muted); font-weight: 500; transition: background 120ms, color 120ms; }
+  nav[aria-label="Main"] a:hover { color: var(--text); background: rgb(255 255 255 / 0.05); }
+  nav[aria-label="Main"] a:active { background: rgb(255 255 255 / 0.09); }
+  .gh { display: grid; place-items: center; }
+  .gh .tip { position: absolute; top: calc(100% + 6px); right: 0; padding: 4px 8px; border-radius: 6px; background: var(--panel); border: 1px solid var(--rule); font-size: 0.75rem; color: var(--text); opacity: 0; pointer-events: none; transition: opacity 120ms; white-space: nowrap; }
+  .gh:hover .tip, .gh:focus-visible .tip { opacity: 1; }
+
+  .hero { position: relative; padding-top: 40px; overflow: hidden; }
+  /* Survey construction lines, after the social banner: two hairlines and concentric circles. */
+  .survey { position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(circle at 78% 34%, transparent 0 229px, var(--line) 230px 231px, transparent 232px 299px, var(--line) 300px 301px, transparent 302px),
+      linear-gradient(var(--line), var(--line)) 0 120px / 100% 1px no-repeat,
+      linear-gradient(var(--line), var(--line)) 78% 0 / 1px 100% no-repeat; }
+  .hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); align-items: center; gap: 32px; min-height: 440px; }
+  h1 { margin: 18px 0 20px; font: 800 clamp(2.8rem, 6.4vw, 5.2rem)/0.98 var(--display); letter-spacing: -0.045em; }
+  .lead { max-width: 36rem; margin: 0; font-size: 1.2rem; line-height: 1.55; color: #c6d3e0; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border-radius: 10px; border: 1px solid var(--rule); text-decoration: none; font-weight: 600; transition: background 120ms, transform 120ms; }
+  .btn:hover { background: rgb(255 255 255 / 0.06); }
+  .btn:active { transform: translateY(1px); }
+  .btn.primary { min-width: 200px; border-color: transparent; background: var(--cyan); color: var(--ink); }
+  .btn.primary:hover { background: #7ae2f7; }
+  .btn.primary:active { background: #2cc3e4; }
+  .hero-mark { display: grid; place-items: center; }
+  .hero-mark img { width: min(320px, 70%); filter: drop-shadow(0 30px 60px rgb(14 165 233 / 0.18)); }
+  .shot-frame { position: relative; margin-top: 56px; padding: 10px; border: 1px solid var(--rule); border-radius: 16px 16px 0 0; border-bottom: 0; background: var(--navy); }
+  .shot-frame :global(img) { border-radius: 8px 8px 0 0; }
+
+  .band { padding: 112px 0 40px; }
+  h2 { margin: 12px 0 14px; font: 750 clamp(1.8rem, 3.4vw, 2.6rem)/1.08 var(--display); letter-spacing: -0.03em; }
+  .intro { max-width: 44rem; margin: 0 0 40px; color: var(--muted); }
+
+  .feature { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 56px; align-items: center; padding: 72px 0; border-top: 1px solid var(--rule); }
+  .feature.flip .feature-copy { order: 2; }
+  .feature.wide { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .feature.wide .feature-copy { max-width: 40rem; }
+  .feature-copy p:not(.eyebrow) { color: var(--muted); margin: 0 0 18px; }
+  .feature-shot { border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; background: var(--navy); }
+  .more { color: var(--cyan); text-decoration: none; font-weight: 600; }
+  .more:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .more:active { color: #7ae2f7; }
+
+  .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding: 24px 0 72px; }
+  .facts div { padding: 22px; border: 1px solid var(--rule); border-radius: 12px; background: var(--panel); }
+  .facts h3 { margin: 0 0 6px; font-size: 1.05rem; }
+  .facts p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+  .facts a { color: var(--cyan); }
+
+  .install { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 56px; align-items: center; padding: 72px 0 96px; border-top: 1px solid var(--rule); }
+  .install p:not(.eyebrow) { color: var(--muted); }
+
+  .foot { border-top: 1px solid var(--rule); background: #0b1320; }
+  .foot-grid { display: grid; grid-template-columns: minmax(0, 2fr) 1fr 1fr; gap: 32px; padding: 48px 0 56px; }
+  .foot p { color: var(--muted); font-size: 0.92rem; max-width: 30rem; }
+  .foot p a { color: var(--text); }
+  .foot nav { display: flex; flex-direction: column; gap: 8px; }
+  .foot h3 { margin: 0 0 4px; font: 500 0.78rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .foot nav a { text-decoration: none; color: var(--text); width: fit-content; }
+  .foot nav a:hover { color: var(--cyan); }
+
+  @media (max-width: 860px) {
+    nav[aria-label="Main"] a:not(.gh):not([href="/docs/"]) { display: none; }
+    .hero-grid, .feature, .install, .facts, .foot-grid { grid-template-columns: minmax(0, 1fr); }
+    .hero-grid { min-height: 0; }
+    .hero-mark { display: none; }
+    .feature { gap: 28px; padding: 56px 0; }
+    .feature.flip .feature-copy { order: 0; }
+    .band { padding-top: 80px; }
+    .survey { background: linear-gradient(var(--line), var(--line)) 0 96px / 100% 1px no-repeat; }
+  }
+</style>

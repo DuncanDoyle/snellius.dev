@@ -1,0 +1,35 @@
+/* Starlight theme: Snellius brand on the docs. Dark is the default; light follows below. */
+:root {
+  --sl-font: "Figtree Variable", system-ui, sans-serif;
+  --sl-font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+  --sl-color-accent-low: #0b3550;
+  --sl-color-accent: #44d5f3;
+  --sl-color-accent-high: #c9f4fc;
+  --sl-color-white: #ffffff;
+  --sl-color-gray-1: #e6eef5;
+  --sl-color-gray-2: #c6d3e0;
+  --sl-color-gray-3: #93a4b8;
+  --sl-color-gray-4: #4a5d76;
+  --sl-color-gray-5: #22344d;
+  --sl-color-gray-6: #16223a;
+  --sl-color-black: #0e1726;
+}
+:root[data-theme="light"] {
+  --sl-color-accent-low: #d5f3fc;
+  --sl-color-accent: #0b6e99;
+  --sl-color-accent-high: #0b2545;
+  --sl-color-white: #0e1726;
+  --sl-color-gray-1: #16223a;
+  --sl-color-gray-2: #2c3e56;
+  --sl-color-gray-3: #4a5d76;
+  --sl-color-gray-4: #8496ab;
+  --sl-color-gray-5: #c6d3e0;
+  --sl-color-gray-6: #e7f1f6;
+  --sl-color-gray-7: #f3f8fb;
+  --sl-color-black: #ffffff;
+}
+.site-title { font-weight: 700; letter-spacing: -0.02em; font-size: 1.25rem; }
+.site-title img { height: 1.6rem; }
+:root[data-theme="light"] .site-title img { content: url("/symbol-light.svg"); }
+.sl-markdown-content h1, .sl-markdown-content h2, h1#_top { letter-spacing: -0.02em; }
+.sl-markdown-content code:not(pre code) { font-size: 0.9em; }
