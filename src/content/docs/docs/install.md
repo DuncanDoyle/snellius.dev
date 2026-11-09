@@ -24,7 +24,7 @@ Read the [upgrade notes](https://github.com/DuncanDoyle/snellius#upgrade-notes) 
 
 ## How Snellius finds kgateway
 
-An install is a kgateway controller Deployment with the labels `kgateway=kgateway` and `app.kubernetes.io/component=controller`. The kgateway Helm chart sets both. Snellius shows every install it finds, so one Snellius can watch several kgateway installs in the same cluster.
+An install is a kgateway controller Deployment with the labels `kgateway=kgateway` and `app.kubernetes.io/component=controller`, running a container image named `kgateway`. The kgateway Helm chart sets all three; an image from a mirror registry is fine. Snellius shows every install it finds, so one Snellius can watch several kgateway installs in the same cluster.
 
 To show only one, pin it:
 
@@ -59,6 +59,7 @@ In the cluster, Snellius scrapes the controller Pods on port 9092 and reads Envo
 
 | You see | Check |
 |---|---|
-| "No kgateway install found" | The controller Deployment has both labels above, and the UI's ServiceAccount can list Deployments. |
+| "No kgateway install found" | The controller Deployment has both labels above, its image is named `kgateway`, and the UI's ServiceAccount can list Deployments. |
+| Your kgateway controller runs a custom build under another image name | Set `installs.classOnly=true`. Snellius then shows the controller from its GatewayClass and Gateway API status, without the kgateway-specific checks. |
 | A check reads "not available" | The finding page says why: a chart toggle is off, RBAC denies the read, or the network blocks the port. |
 | Counts lower than you expect | The controller's `discoveryNamespaceSelectors`. Snellius counts only the namespaces the controller watches. |
