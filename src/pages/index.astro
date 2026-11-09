@@ -127,7 +127,7 @@ const features = [
         <h2 id="trust" class="visually-hidden">Read-only by design</h2>
         <div><h3>Only get, list and watch</h3><p>The ClusterRole grants read verbs only. Snellius never changes your cluster.</p></div>
         <div><h3>Never reads Secrets</h3><p>Secrets, ConfigMaps and the proxy and port-forward subresources stay out of its RBAC.</p></div>
-        <div><h3>Private by default</h3><p>There is no login yet, so the chart exposes it through port-forward only. <a href="/docs/security/">Read the trust model</a>.</p></div>
+        <div><h3>Private by default</h3><p>There is no login yet. The chart creates a ClusterIP Service only, and you open the UI with a port-forward. <a href="/docs/security/">Read the trust model</a>.</p></div>
       </section>
 
       <section class="install wrap" aria-labelledby="install">
@@ -227,7 +227,7 @@ const features = [
     nav[aria-label="Main"] a:not(.gh):not([href="/docs/"]) { display: none; }
     .hero-grid, .feature, .install, .facts, .foot-grid { grid-template-columns: minmax(0, 1fr); }
     .hero-grid { min-height: 0; }
-    .hero-mark { display: none; }
+    .hero-mark { display: none; } /* the header already carries the mark */
     .feature { gap: 28px; padding: 56px 0; }
     .feature.flip .feature-copy { order: 0; }
     .band { padding-top: 80px; }

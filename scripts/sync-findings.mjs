@@ -8,6 +8,7 @@ if (!res.ok) throw new Error(`fetch findings.md at ${ref}: ${res.status}`);
 
 const body = (await res.text())
   .replace(/^# .*\n+/, "") // Starlight renders the title from frontmatter
+  .replace("\"Learn more\" on a finding's page opens its entry here.", "\"Learn more\" on a finding's page opens its entry in the Snellius repository, for the version you run.")
   .replace(/\]\(\.\.\/([^)]+)\)/g, (_, path) => {
     const [file, anchor] = path.split("#");
     return file === "README.md" ? `](${repo}${anchor ? `#${anchor}` : ""})` : `](${repo}/blob/main/${path})`;

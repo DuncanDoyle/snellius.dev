@@ -14,7 +14,7 @@ Each problem is a finding. A finding has:
 - **Evidence**: the objects involved, the conditions or metrics that raised it, and since when.
 - **A fix**: what to change. Some findings also list next-step commands filled in for your install. Snellius never runs them.
 
-"Learn more" on a finding opens its entry in the [finding reference](/docs/findings/).
+"Learn more" on a finding opens its entry in the finding reference in the Snellius repository, for the version you run. The same reference is on this site under [Finding codes](/docs/findings/).
 
 Findings that look the same are grouped on the overview. For example, five routes that point at the same missing Service show as one group with five affected objects.
 
@@ -30,4 +30,4 @@ When Snellius cannot see enough to judge, the state is **unknown**, not healthy.
 
 ## Since when
 
-A finding from a status condition takes the condition's `lastTransitionTime`. For other findings, "since" is when Snellius first saw the problem. Snellius keeps that time in memory, so it resets when the UI restarts.
+A finding from a status condition takes the condition's `lastTransitionTime`. For other findings, "since" is when Snellius first saw the problem. Snellius keeps that time in memory, so it resets when the UI restarts. With controller logs on, KGWUI-001 can recover its time from the last 15 minutes of logs.

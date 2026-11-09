@@ -17,13 +17,14 @@ The [chart README](https://github.com/DuncanDoyle/snellius/blob/main/deploy/helm
 | `diagnostics.crds` | `true` | Read Gateway API CRD metadata, for version-skew checks. |
 | `diagnostics.proxyStats` | `true` | Read Envoy stats from each proxy Pod on port 9091. |
 | `diagnostics.endpoints` | `true` | Watch Services and EndpointSlices, for backends without ready endpoints. |
-| `diagnostics.controllerLogs` | `false` | Read controller logs for derived signals. Adds a `pods/log` Role. |
+| `diagnostics.controllerLogs` | `false` | Read controller logs for derived signals. Adds a `pods/log` Role in each namespace of `diagnostics.controllerLogsNamespaces`. |
+| `diagnostics.controllerLogsNamespaces` | `[kgateway-system]` | The namespaces that get that Role. List every namespace that runs a kgateway controller. |
 | `delegation.edgeCap` | `0` | Delegation edges computed per install; `0` keeps the default of 10,000. |
 | `installs.classOnly` | `false` | Also show a GatewayClass whose controller Snellius does not recognise, from Gateway API status alone. From v0.6.0. |
 | `extraArgs` | `[]` | More flags for the binary, for example `{--poll-interval=10m}`. |
 | `resources` | 50m CPU, 128Mi requested; 512Mi limit | Container resources. |
 
-Turning a `diagnostics` toggle off also drops its RBAC rule. Checks that need it then read "not available", and the install's state does not change.
+Turning `events`, `crds` or `endpoints` off also drops its RBAC rule; `proxyStats` needs no RBAC, only network access to port 9091. Checks that need a disabled input read "not available", and the install's state does not change.
 
 ## Binary flags
 

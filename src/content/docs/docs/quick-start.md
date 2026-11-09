@@ -29,7 +29,7 @@ Open [http://localhost:8080](http://localhost:8080).
 
 - **Overview.** The install page opens on its health state and the problems that need attention first. With more than one kgateway install, the home page lists them all.
 - **Gateways and Routes.** The tabs in the header list every Gateway, ListenerSet and route the install manages. Open one to see its conditions, listeners and attachment.
-- **Findings.** Every problem, filterable by severity, code, kind and namespace. "Learn more" on a finding opens its entry in the [finding reference](/docs/findings/).
+- **Findings.** Every problem, filterable by severity, code, kind and namespace. "Learn more" on a finding explains its cause and fix; the [finding codes](/docs/findings/) page has every entry.
 
 :::note
 Snellius has no login yet. Anyone who reaches the UI sees what its ServiceAccount can read. Keep it behind a port-forward, or read the [security and trust model](/docs/security/) before you expose it.

@@ -23,7 +23,7 @@ The chart's ClusterRole grants only `get`, `list` and `watch`, on:
 
 Snellius never reads Secrets, and its ClusterRole excludes them. It has no access to ConfigMaps, `*/proxy` or `pods/portforward` either. No other field is redacted, because a secret can sit in any field, such as an inline token in a Deployment's env vars.
 
-`diagnostics.controllerLogs` (off by default) adds `get` on `pods/log` in the controller's namespace. Snellius then keeps fixed fields from the log and never stores or shows log text.
+`diagnostics.controllerLogs` (off by default) adds `get` on `pods/log` in the namespaces listed in `diagnostics.controllerLogsNamespaces` (default `kgateway-system`). Snellius then keeps fixed fields from the log and never stores or shows log text.
 
 ## Exposure
 

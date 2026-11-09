@@ -9,7 +9,7 @@ Every release is tested on kind against these kgateway versions:
 
 | kgateway | Gateway API | Notes |
 |---|---|---|
-| 2.5 | v1.7 | Policy targets come from the controller's `TargetNotFound` status. KGWUI-024 (config withheld) needs 2.5. |
+| 2.5 | v1.7 | Named policy targets come from the controller's `TargetNotFound` status; a selector that matches nothing is still a computed warning. KGWUI-024 (config withheld) needs 2.5. |
 | 2.4 | v1.6 | Snellius computes "Policy target not found" itself. KGWUI-024 reads "Not available on this version". |
 | 2.3 | v1.5 | As 2.4. |
 

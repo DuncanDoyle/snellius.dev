@@ -74,8 +74,12 @@ const ys = [12.5, 37.5, 62.5, 87.5];
   @media (max-width: 860px) {
     .tri { grid-template-columns: 1fr; gap: 16px; }
     .rays, .beam { display: none; }
-    .sources li { padding-left: 30px; }
-    .sources li::after { left: 12px; right: auto; top: 22px; margin: 0; }
-    .prism img { width: 72px; height: 72px; }
+    .sources { position: relative; }
+    .sources li { padding-left: 34px; }
+    .sources li::after { left: 12px; right: auto; top: 22px; margin: 0; z-index: 1; }
+    /* One connector runs through the four readings into the prism's observation circle. */
+    .sources::before { content: ""; position: absolute; left: 16px; top: 22px; bottom: -62px; width: 2px; background: linear-gradient(var(--blue), var(--cyan), var(--teal), var(--gold)); }
+    .prism { justify-items: start; margin-left: 2px; }
+    .prism img { width: 72px; height: 72px; transform: none; }
   }
 </style>
