@@ -102,6 +102,17 @@ const features = [
         </div>
       </section>
 
+      <section class="demo wrap" aria-labelledby="tour">
+        <p class="eyebrow">Video</p>
+        <h2 id="tour">A one-minute tour</h2>
+        <p class="intro">Find a broken route, read its two signals, and see what secure mode shows each user.</p>
+        <div class="demo-frame">
+          <video controls playsinline preload="none" width="1920" height="1080" poster="/media/snellius-demo-poster.jpg" aria-label="A one-minute tour of Snellius, with no sound">
+            <source src="/media/snellius-demo.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </section>
+
       <section class="band wrap" aria-labelledby="how">
         <p class="eyebrow">How it works</p>
         <h2 id="how">One picture, four sources</h2>
@@ -191,6 +202,10 @@ const features = [
   .hero-mark img { width: min(240px, 100%); filter: drop-shadow(0 30px 60px rgb(14 165 233 / 0.18)); }
   .shot-frame { position: relative; margin-top: 56px; padding: 10px; border: 1px solid var(--rule); border-radius: 16px 16px 0 0; border-bottom: 0; background: var(--navy); }
   .shot-frame :global(img) { border-radius: 8px 8px 0 0; }
+
+  .demo { padding: 112px 0 0; }
+  .demo-frame { border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; background: var(--ink); aspect-ratio: 16 / 9; }
+  .demo-frame video { display: block; width: 100%; height: 100%; }
 
   .band { padding: 112px 0 40px; }
   h2 { margin: 12px 0 14px; font: 750 clamp(1.8rem, 3.4vw, 2.6rem)/1.08 var(--display); letter-spacing: -0.03em; }
