@@ -21,4 +21,4 @@ Snellius applies the attachment and delegation rules of the kgateway version it 
 - **API v1** (`/api/v1/...`): fields are only added, never changed or removed.
 - **Finding codes**, such as `KGWUI-013`. A code never changes meaning.
 
-The [upgrade notes](https://github.com/DuncanDoyle/snellius#upgrade-notes) list every change between releases.
+The [release notes](/docs/releases/) list every change between releases.

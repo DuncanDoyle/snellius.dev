@@ -17,6 +17,8 @@ Some findings, or parts of their evidence, are computed by the UI, not reported 
 
 Severities: an error turns the install red, a warning turns it yellow, and info never changes its state on its own. A check that is still pending can make the install unknown, as the KGWUI-003 and KGWUI-008 entries say.
 
+**Holds.** Some checks wait before they decide, such as KGWUI-023's 30 s and KGWUI-018's 5 min. While a check waits, its result carries a `hold`: how many items it is deciding on and when the first is due. "What was checked" shows such a check as "Deciding", not green. A hold never changes the install's state, and it starts again when the UI restarts.
+
 **Since.** A finding from a status condition takes the condition's `lastTransitionTime`. For every other finding, `since` is when the UI first saw it. The UI keeps that time in memory, so it resets when the UI restarts. The [README upgrade notes](https://github.com/DuncanDoyle/snellius#upgrade-notes) say the same. KGWUI-001 is the one exception: with controller logs on, its `since` can come from the log.
 
 **Next steps.** Some findings have next steps: commands filled in for your install. The UI never runs them. Each one names the permission it needs in your own RBAC, such as `pods/log`.
@@ -369,7 +371,9 @@ Nothing is compared during a controller rollout and for 10 minutes after it, so 
 
 `backend-no-ready-endpoints` · warning · Services, EndpointSlices
 
-**Cause.** A route sends traffic to a Service port that has had no ready endpoint for 30 s, so requests to it get 503. The UI checks only a rule `backendRef` to a core `Service` with a weight above 0, on a parent where the controller reports `ResolvedRefs=True` for the route's current generation. The Service must exist and not be `ExternalName`. The UI sums ready endpoints for that port over all the Service's EndpointSlices; an endpoint with `ready` unset counts as ready. One ready endpoint restarts the 30 s. Delegation refs, mirror targets, `Backend` refs and Hostname refs are never checked. There is one finding per Service port; the routes that use it are the affected objects. Scaling to zero can be deliberate, so this is a warning.
+**Cause.** A route sends traffic to a Service port that has had no ready endpoint for 30 s. HTTP requests to it get a 503; on a TCP or TLS route, connections fail. With a weighted split, only the share sent to this Service fails. The UI checks only a rule `backendRef` to a core `Service` with a weight above 0, on a parent where the controller reports `ResolvedRefs=True` for the route's current generation. The Service must exist and not be `ExternalName`. The UI sums ready endpoints for that port over all the Service's EndpointSlices; an endpoint with `ready` unset counts as ready. One ready endpoint restarts the 30 s. Delegation refs, mirror targets, `Backend` refs and Hostname refs are never checked. There is one finding per Service port; the routes that use it are the affected objects. Scaling to zero can be deliberate, so this is a warning.
+
+Routes whose rule backendRefs name the Service carry the `backend-problem` flag and show at least a warning, like any route to a backend with an error or warning finding (D-082).
 
 **Evidence.** The Service, the port, its ready and total endpoints, and how many EndpointSlices the Service has. A dual-stack Service lists its Pods once per address family, so the counts are those of the larger family.
 

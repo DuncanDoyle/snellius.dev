@@ -25,11 +25,11 @@ export default defineConfig({
         { label: "Start here", items: ["docs", "docs/quick-start"] },
         {
           label: "Guides",
-          items: ["docs/install", "docs/health", "docs/explore", "docs/security"],
+          items: ["docs/install", "docs/health", "docs/explore", "docs/security", "docs/secure-mode", "docs/access", "docs/operations"],
         },
         {
           label: "Reference",
-          items: ["docs/configuration", "docs/findings", "docs/compatibility"],
+          items: ["docs/configuration", "docs/findings", "docs/releases", "docs/compatibility"],
         },
         { label: "Project", items: ["docs/contributing"] },
       ],
