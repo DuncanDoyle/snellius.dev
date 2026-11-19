@@ -5,6 +5,12 @@ description: What changes for you in each Snellius release, and what to do befor
 
 This page covers the changes you see in the UI and in the chart. The [upgrade notes](https://github.com/DuncanDoyle/snellius#upgrade-notes) in the repository also list API and extension changes.
 
+## v0.8.2
+
+- **Intro in local mode.** Local mode has no sign-in, so the intro plays on the first page load in each browser tab instead. A reload in the same tab does not replay it.
+- **Sign-in intro.** The finished prism and name hold for about 0.7 s before the intro fades, and the prism's outline closes at its apex.
+- No chart values, flags or API fields change. Upgrade with `--version 0.8.2`.
+
 ## v0.8.1
 
 - **Sign-in intro.** In secure mode, a fresh sign-in plays a short animation of the Snellius prism while the overview loads. A click or key press skips it. It never plays with reduced motion, on a reload, or on later navigation.

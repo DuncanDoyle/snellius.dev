@@ -11,7 +11,7 @@ You need:
 ## 1. Install the chart
 
 ```sh
-helm install ui oci://ghcr.io/duncandoyle/charts/snellius --version 0.8.1 \
+helm install ui oci://ghcr.io/duncandoyle/charts/snellius --version 0.8.2 \
   -n snellius --create-namespace
 ```
 
