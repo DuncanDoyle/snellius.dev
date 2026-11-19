@@ -21,6 +21,8 @@ The routes list covers HTTPRoutes, GRPCRoutes, TCPRoutes and TLSRoutes. Filter i
 
 A route page shows its rules, matches and backend references, and one card per parent with that parent's conditions.
 
+Each route also shows two signals: **Configuration**, from the route's own status, and **Traffic path**, from the whole path to its backends. The list filters by each. A route can read "Accepted, but no path to a backend", "Not attached to a Gateway" or "Traffic path has errors". A user who cannot read the whole path sees "You don't have permission to check the whole path." See [Two signals per route](/docs/access/#two-signals-per-route).
+
 ## Why a route is or isn't attached
 
 Gateway API attachment depends on several things at once: the listener's protocol and port, its `allowedRoutes` namespaces and kinds, hostnames and `sectionName`. Snellius computes the outcome with kgateway's own rules for your version, and shows it under each parent as **Computed outcome**, for example:

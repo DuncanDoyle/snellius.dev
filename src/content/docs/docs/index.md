@@ -29,5 +29,7 @@ The controller's status always wins. Where Snellius computes something itself, t
 ## Where to go next
 
 - [Quick start](/docs/quick-start/): install Snellius and open it in five minutes.
-- [Security and trust model](/docs/security/): read this before you expose the UI.
+- [Security and trust model](/docs/security/): local and secure mode. Read this before you expose the UI.
+- [Secure mode](/docs/secure-mode/): sign users in with OIDC, and show each one only what their RBAC allows.
+- [Release notes](/docs/releases/): what changes in each release, and what to do before you upgrade.
 - [Finding codes](/docs/findings/): every finding, its cause and its fix.

@@ -18,6 +18,8 @@ Each problem is a finding. A finding has:
 
 Findings that look the same are grouped on the overview. For example, five routes that point at the same missing Service show as one group with five affected objects.
 
+In [secure mode](/docs/secure-mode/), a user sees only the findings about objects they can read. Checks that need the full read show "Not checked" in **What was checked**. That means Snellius did not show the result to this user, not that the check passed or failed. See [What each user sees](/docs/access/).
+
 ## Where findings come from
 
 - **Status.** Conditions the controller wrote, such as `Accepted: False` on a route or `Programmed: False` on a Gateway.

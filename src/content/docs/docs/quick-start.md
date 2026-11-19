@@ -11,11 +11,11 @@ You need:
 ## 1. Install the chart
 
 ```sh
-helm install ui oci://ghcr.io/duncandoyle/charts/snellius \
+helm install ui oci://ghcr.io/duncandoyle/charts/snellius --version 0.8.0 \
   -n snellius --create-namespace
 ```
 
-This installs the latest release. Add `--version <version>` to pick one; the [releases page](https://github.com/DuncanDoyle/snellius/releases) lists them.
+`--version` picks the chart and the matching image. The [releases page](https://github.com/DuncanDoyle/snellius/releases) lists every version.
 
 ## 2. Open the UI
 
@@ -32,7 +32,7 @@ Open [http://localhost:8080](http://localhost:8080).
 - **Findings.** Every problem, filterable by severity, code, kind and namespace. "Learn more" on a finding explains its cause and fix; the [finding codes](/docs/findings/) page has every entry.
 
 :::note
-Snellius has no login yet. Anyone who reaches the UI sees what its ServiceAccount can read. Keep it behind a port-forward, or read the [security and trust model](/docs/security/) before you expose it.
+This install runs in local mode, with no sign-in. Whoever can port-forward to it sees everything its ServiceAccount can read. To expose it through a Gateway, use [secure mode](/docs/secure-mode/), and read the [security and trust model](/docs/security/) first.
 :::
 
 ## Uninstall
