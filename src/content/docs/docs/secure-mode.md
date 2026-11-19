@@ -83,7 +83,7 @@ httpRoute:
 ```
 
 ```sh
-helm install ui oci://ghcr.io/duncandoyle/charts/snellius --version 0.8.0 \
+helm install ui oci://ghcr.io/duncandoyle/charts/snellius --version 0.8.1 \
   -n snellius --create-namespace -f values.yaml
 ```
 

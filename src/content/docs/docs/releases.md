@@ -5,6 +5,11 @@ description: What changes for you in each Snellius release, and what to do befor
 
 This page covers the changes you see in the UI and in the chart. The [upgrade notes](https://github.com/DuncanDoyle/snellius#upgrade-notes) in the repository also list API and extension changes.
 
+## v0.8.1
+
+- **Sign-in intro.** In secure mode, a fresh sign-in plays a short animation of the Snellius prism while the overview loads. A click or key press skips it. It never plays with reduced motion, on a reload, or on later navigation.
+- No chart values, flags or API fields change. Upgrade with `--version 0.8.1`.
+
 ## v0.8.0: identity and access
 
 ### Before you upgrade
