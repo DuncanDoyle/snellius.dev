@@ -1,6 +1,9 @@
 ---
 title: Install and configure
-description: Install Snellius with Helm, pin it to one install, and expose it safely.
+description: Install Snellius with Helm, pin it to one kgateway install, and expose it safely.
+head:
+  - tag: title
+    content: "Install the Snellius UI for kgateway with Helm"
 ---
 
 Snellius ships as a container image, `ghcr.io/duncandoyle/snellius`, and a Helm chart, `oci://ghcr.io/duncandoyle/charts/snellius`. Each release publishes both with the same version.

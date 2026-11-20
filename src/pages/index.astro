@@ -13,6 +13,25 @@ import gateway from "../assets/shots/gateway-focus-dark.png";
 const repo = "https://github.com/DuncanDoyle/snellius";
 const title = "Snellius: the observability UI for kgateway";
 const description = "See whether each kgateway install is healthy, why a route is or isn't attached, and what every Gateway manages. One Helm chart, read-only access.";
+// Structured data for search engines: the site and the software it describes.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "WebSite", name: "Snellius", url: "https://snellius.dev/" },
+    {
+      "@type": "SoftwareApplication",
+      name: "Snellius",
+      description,
+      url: "https://snellius.dev/",
+      image: "https://snellius.dev/og.png",
+      applicationCategory: "DeveloperApplication",
+      operatingSystem: "Kubernetes",
+      license: "https://www.apache.org/licenses/LICENSE-2.0",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      sameAs: [repo],
+    },
+  ],
+};
 
 const features = [
   {
@@ -55,12 +74,15 @@ const features = [
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="canonical" href="https://snellius.dev/" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Snellius" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content="https://snellius.dev/" />
     <meta property="og:image" content="https://snellius.dev/og.png" />
     <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>

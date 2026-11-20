@@ -1,6 +1,9 @@
 ---
 title: Health and findings
-description: How Snellius decides an install's health, and how to read a finding.
+description: How Snellius decides whether a kgateway install is healthy, and how to read a finding.
+head:
+  - tag: title
+    content: "kgateway health checks and findings | Snellius"
 ---
 
 Every install has one health state: **healthy**, **warning**, **error** or **unknown**. The overview shows that state and the problems that need attention first, ranked by severity.
