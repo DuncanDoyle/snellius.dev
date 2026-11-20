@@ -1,6 +1,9 @@
 ---
 title: Quick start
-description: Install Snellius with Helm and open it with a port-forward.
+description: Install Snellius with Helm and open the kgateway UI with a port-forward.
+head:
+  - tag: title
+    content: "Quick start: install the Snellius UI for kgateway"
 ---
 
 You need:

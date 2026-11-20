@@ -1,6 +1,9 @@
 ---
 title: Gateways and routes
-description: Browse Gateways, ListenerSets and routes, and see why a route is or isn't attached.
+description: Browse kgateway Gateways, ListenerSets and routes, and see why a route is or isn't attached.
+head:
+  - tag: title
+    content: "kgateway Gateways and routes | Snellius"
 ---
 
 The header of an install has a tab for each kind it manages: **Gateways**, **Routes** and **ListenerSets**, next to **Overview**, **Findings** and **Processes**.

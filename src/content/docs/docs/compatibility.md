@@ -1,6 +1,9 @@
 ---
 title: Compatibility
 description: Supported kgateway versions, and what is stable between releases.
+head:
+  - tag: title
+    content: "Supported kgateway versions | Snellius"
 ---
 
 ## kgateway versions

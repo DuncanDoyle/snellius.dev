@@ -1,6 +1,9 @@
 ---
 title: What is Snellius?
 description: A read-only UI for Kubernetes Gateway API, built for kgateway.
+head:
+  - tag: title
+    content: "What is Snellius? A read-only UI for kgateway"
 sidebar:
   label: Overview
 ---
