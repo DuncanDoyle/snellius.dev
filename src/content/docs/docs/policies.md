@@ -23,13 +23,13 @@ The list is sorted by namespace and name. The order says nothing about which pol
 
 ## A policy's page
 
-A policy page shows:
+A policy page has an Overview tab with these sections, in this order, and a **YAML** tab:
 
-- **Targets.** Each targetRef with its check: found, not found, section not found, or not checked. Label selectors show as written, with no check.
+- **Summary** of the policy.
 - **Status per ancestor.** kgateway writes a status entry for each object the policy reaches, such as a Gateway or a backend port. Gateway API calls that object an ancestor. Snellius shows each entry as written. Entries from another controller or install, and entries that are stale or still waiting for status, stay visible but count in no summary.
+- **Targets.** Each targetRef with its check: found, not found, section not found, or not checked. Label selectors show as written, with no check.
 - **Configuration by feature**, read from the spec.
 - **Precedence annotations** as written, such as `kgateway.dev/policy-weight` and `kgateway.dev/inherited-policy-priority`. Snellius never evaluates them.
-- **YAML** of the policy.
 
 ## Policies on other pages
 

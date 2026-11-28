@@ -5,6 +5,16 @@ description: What changes for you in each Snellius release, and what to do befor
 
 This page covers the changes you see in the UI and in the chart. The [upgrade notes](https://github.com/DuncanDoyle/snellius#upgrade-notes) in the repository also list API and extension changes.
 
+## v0.9.2: detail page layout
+
+- **Section cards.** Route, Gateway, ListenerSet, policy, backend and finding pages show their sections as cards, in one fixed order: what leads to the object first, then its status, its own configuration, runtime, the policies that name it, and related objects. On pages with tabs, the cards are on the **Overview** tab. See [Detail pages](/docs/explore/#detail-pages).
+- **Section nav.** A sticky list on the left shows the sections in groups, with counts, and highlights the one in view. In a narrow window, select **Sections** above the cards to open it.
+- **Section links.** Select a section in the list, and the address bar shows a link to it, ending in a name such as `#route-rules`. Paste that link in a ticket to open the page at that section.
+- **One column.** The section cards stay in one column at every window width. Wide windows no longer get a second column on the right, so the order never changes with the width.
+- **Child routes.** On a delegating route, the **Child routes** section loads with the page. You no longer open it first.
+- **Finding page.** The severity and the code are in the **Summary** card.
+- No chart values, flags or API fields change. Upgrade with `--version 0.9.2`.
+
 ## v0.9.1
 
 - **Config accepted.** A Gateway's data plane reads "Config accepted" only when no proxy is warming up (KGWUI-025) or disconnected (KGWUI-026). When no proxy rejects config or has it withheld, but one is warming up or disconnected, the overview reads **Unknown** and the Gateway page reads **Warning**. See [Gateways](/docs/explore/#gateways).
@@ -23,7 +33,7 @@ This page covers the changes you see in the UI and in the chart. The [upgrade no
 
 ### Finding codes
 
-The [finding codes](/docs/findings/) page is synced for v0.9.1. KGWUI-002, 003 and 016 have the new rules for policies.
+On the [finding codes](/docs/findings/) page, KGWUI-002, 003 and 016 have the new rules for policies.
 
 ## v0.8.2
 
