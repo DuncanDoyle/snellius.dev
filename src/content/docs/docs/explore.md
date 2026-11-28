@@ -15,7 +15,7 @@ Gateway, ListenerSet, route and backend pages also have a **Policies** section, 
 A Gateway page shows:
 
 - Its conditions, as the controller wrote them.
-- **Data plane**: whether its proxies reject config, and what the controller built (listeners, routes, clusters, endpoints). "Config accepted" means no proxy rejects config or has it withheld, and none is warming up or disconnected. Snellius does not compare config versions, so a connected proxy that runs old config still reads as "Config accepted".
+- **Data plane**: whether its proxies reject config, and what the controller built (listeners, routes, clusters, endpoints). "Config accepted" means no proxy rejects config or has it withheld, and none is warming up or disconnected. If one is warming up or disconnected, the overview reads **Unknown** and the Gateway page reads **Warning**. Snellius does not compare config versions, so a connected proxy that runs old config still reads as "Config accepted".
 - **Proxies**: each proxy Pod with its readiness, restarts, last exit and version.
 - **Listeners**: port, protocol, hostname, TLS and allowed routes, with the attached route count from status next to the count Snellius computes.
 - **ListenerSets** attached to the Gateway.
