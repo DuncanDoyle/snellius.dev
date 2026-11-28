@@ -10,21 +10,38 @@ The header of an install has a tab for each kind it manages: **Gateways**, **Rou
 
 Gateway, ListenerSet, route and backend pages also have a **Policies** section, and an expanded listener row lists the policies that name that listener. See [Policies](/docs/policies/).
 
+## Detail pages
+
+Every detail page (route, Gateway, ListenerSet, policy, backend and finding) shows its sections as cards, always in the same order. A page shows only the groups it has:
+
+1. **Where it sits**: what leads to the object, and its parents.
+2. **Status**: the summary and the conditions.
+3. **What it does**: the object's own configuration, such as listeners or rules.
+4. **Runtime**: what the data plane does with it.
+5. **What acts on it**: the policies that name it.
+6. **Related**: child and related objects.
+
+A nav on the left lists the sections with their counts and highlights the one in view. In a narrow window it becomes a **Sections** control above the cards. No section is ever collapsed, so the browser's search finds everything on the Overview tab.
+
+Each section has a link, such as `…#route-rules`. Paste it in a ticket, and it opens the page at that section.
+
 ## Gateways
 
 A Gateway page shows:
 
-- Its conditions, as the controller wrote them.
-- **Data plane**: whether its proxies reject config, and what the controller built (listeners, routes, clusters, endpoints). "Config accepted" means no proxy rejects config or has it withheld, and none is warming up or disconnected. If one is warming up or disconnected, the overview reads **Unknown** and the Gateway page reads **Warning**. Snellius does not compare config versions, so a connected proxy that runs old config still reads as "Config accepted".
-- **Proxies**: each proxy Pod with its readiness, restarts, last exit and version.
+- **Summary** and **Conditions**, as the controller wrote them.
 - **Listeners**: port, protocol, hostname, TLS and allowed routes, with the attached route count from status next to the count Snellius computes.
 - **ListenerSets** attached to the Gateway.
+- The routes attached to the Gateway, and the routes that fail to attach.
+- **Data plane**: whether its proxies reject config, and what the controller built (listeners, routes, clusters, endpoints). "Config accepted" means no proxy rejects config or has it withheld, and none is warming up or disconnected. If one is warming up or disconnected, the overview reads **Unknown** and the Gateway page reads **Warning**. Snellius does not compare config versions, so a connected proxy that runs old config still reads as "Config accepted".
+- **Proxies**: each proxy Pod with its readiness, restarts, last exit and version.
+- **Policies** that name the Gateway.
 
 ## Routes
 
 The routes list covers HTTPRoutes, GRPCRoutes, TCPRoutes and TLSRoutes. Filter it by health, or by reason: not accepted, references not resolved, rules replaced or dropped, no parent, selected but not attached, and more.
 
-A route page shows its rules, matches and backend references, and one card per parent with that parent's conditions.
+A route page starts with **Reached through**, the Gateways and parent routes that lead to it, and **Parents**, one card per parent with that parent's conditions. Then come its summary, its rules with matches and backend references, and the policies that name it.
 
 Each route also shows two signals: **Configuration**, from the route's own status, and **Traffic path**, from the whole path to its backends. The list filters by each. A route can read "Accepted, but no path to a backend", "Not attached to a Gateway" or "Traffic path has errors". A user who cannot read the whole path sees "You don't have permission to check the whole path." See [Two signals per route](/docs/access/#two-signals-per-route).
 
