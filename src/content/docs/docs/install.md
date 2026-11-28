@@ -11,7 +11,7 @@ Snellius ships as a container image, `ghcr.io/duncandoyle/snellius`, and a Helm 
 ## Install
 
 ```sh
-helm install ui oci://ghcr.io/duncandoyle/charts/snellius --version 0.8.2 \
+helm install ui oci://ghcr.io/duncandoyle/charts/snellius --version 0.9.1 \
   -n snellius --create-namespace
 kubectl -n snellius port-forward svc/ui-snellius 8080:80
 ```
@@ -23,7 +23,7 @@ To install from a checkout, set the image tag to a released version: `--set imag
 ## Upgrade
 
 ```sh
-helm upgrade ui oci://ghcr.io/duncandoyle/charts/snellius --version 0.8.2 -n snellius --reuse-values
+helm upgrade ui oci://ghcr.io/duncandoyle/charts/snellius --version 0.9.1 -n snellius --reuse-values
 ```
 
 Read the [release notes](/docs/releases/) first. They list every change in behaviour, release by release.

@@ -25,7 +25,7 @@ export default defineConfig({
         { label: "Start here", items: ["docs", "docs/quick-start"] },
         {
           label: "Guides",
-          items: ["docs/install", "docs/health", "docs/explore", "docs/security", "docs/secure-mode", "docs/access", "docs/operations"],
+          items: ["docs/install", "docs/health", "docs/explore", "docs/policies", "docs/security", "docs/secure-mode", "docs/access", "docs/operations"],
         },
         {
           label: "Reference",

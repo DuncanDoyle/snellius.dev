@@ -6,7 +6,9 @@ head:
     content: "kgateway Gateways and routes | Snellius"
 ---
 
-The header of an install has a tab for each kind it manages: **Gateways**, **Routes** and **ListenerSets**, next to **Overview**, **Findings** and **Processes**.
+The header of an install has a tab for each kind it manages: **Gateways**, **Routes**, **ListenerSets** and **Policies**, next to **Overview**, **Findings** and **Processes**.
+
+Gateway, ListenerSet, route and backend pages also have a **Policies** section, and an expanded listener row lists the policies that name that listener. See [Policies](/docs/policies/).
 
 ## Gateways
 

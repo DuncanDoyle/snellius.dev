@@ -14,7 +14,7 @@ You need:
 ## 1. Install the chart
 
 ```sh
-helm install ui oci://ghcr.io/duncandoyle/charts/snellius --version 0.8.2 \
+helm install ui oci://ghcr.io/duncandoyle/charts/snellius --version 0.9.1 \
   -n snellius --create-namespace
 ```
 
