@@ -12,7 +12,7 @@ Gateway, ListenerSet, route and backend pages also have a **Policies** section, 
 
 ## Detail pages
 
-Every detail page (route, Gateway, ListenerSet, policy, backend and finding) shows its sections as cards, always in the same order. A page shows only the groups it has:
+Every detail page (route, Gateway, ListenerSet, policy, backend and finding) shows its sections as cards, always in the same order. On pages with tabs, the cards are on the **Overview** tab. A page shows only the groups it has:
 
 1. **Where it sits**: what leads to the object, and its parents.
 2. **Status**: the summary and the conditions.
@@ -21,15 +21,15 @@ Every detail page (route, Gateway, ListenerSet, policy, backend and finding) sho
 5. **What acts on it**: the policies that name it.
 6. **Related**: child and related objects.
 
-A nav on the left lists the sections with their counts and highlights the one in view. In a narrow window it becomes a **Sections** control above the cards. No section is ever collapsed, so the browser's search finds everything on the Overview tab.
+A list on the left shows the sections, with counts where a section has them, and highlights the one in view. In a narrow window, select **Sections** above the cards to open the list. No section is ever collapsed, so the browser's search reaches every section. Details inside a row, such as a rule's details, still open per row.
 
-Each section has a link, such as `…#route-rules`. Paste it in a ticket, and it opens the page at that section.
+Select a section in the list, and the address bar shows a link to it, ending in a name such as `#route-rules`. Paste that link in a ticket to open the page at that section.
 
 ## Gateways
 
 A Gateway page shows:
 
-- **Summary** and **Conditions**, as the controller wrote them.
+- **Summary**, and the **Conditions** as the controller wrote them.
 - **Listeners**: port, protocol, hostname, TLS and allowed routes, with the attached route count from status next to the count Snellius computes.
 - **ListenerSets** attached to the Gateway.
 - The routes attached to the Gateway, and the routes that fail to attach.
@@ -41,7 +41,7 @@ A Gateway page shows:
 
 The routes list covers HTTPRoutes, GRPCRoutes, TCPRoutes and TLSRoutes. Filter it by health, or by reason: not accepted, references not resolved, rules replaced or dropped, no parent, selected but not attached, and more.
 
-A route page starts with **Reached through**, the Gateways and parent routes that lead to it, and **Parents**, one card per parent with that parent's conditions. Then come its summary, its rules with matches and backend references, and the policies that name it.
+A route page starts with **Reached through**, the Gateways and parent routes that lead to it, and **Parents**, one card per parent with that parent's conditions. Then come its summary, its rules with matches and backend references, and the policies that name it. A child route also has **Effective matches** after its rules, and a delegating route has **Child routes** at the end.
 
 Each route also shows two signals: **Configuration**, from the route's own status, and **Traffic path**, from the whole path to its backends. The list filters by each. A route can read "Accepted, but no path to a backend", "Not attached to a Gateway" or "Traffic path has errors". A user who cannot read the whole path sees "You don't have permission to check the whole path." See [Two signals per route](/docs/access/#two-signals-per-route).
 
