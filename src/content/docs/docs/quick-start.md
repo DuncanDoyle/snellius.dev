@@ -14,7 +14,7 @@ You need:
 ## 1. Install the chart
 
 ```sh
-helm install ui oci://ghcr.io/duncandoyle/charts/snellius --version 0.8.2 \
+helm install ui oci://ghcr.io/duncandoyle/charts/snellius --version 0.9.1 \
   -n snellius --create-namespace
 ```
 
@@ -32,6 +32,7 @@ Open [http://localhost:8080](http://localhost:8080).
 
 - **Overview.** The install page opens on its health state and the problems that need attention first. With more than one kgateway install, the home page lists them all.
 - **Gateways and Routes.** The tabs in the header list every Gateway, ListenerSet and route the install manages. Open one to see its conditions, listeners and attachment.
+- **Policies.** Every policy of the install, with its targets and what kgateway reports about it. See [Policies](/docs/policies/).
 - **Findings.** Every problem, filterable by severity, code, kind and namespace. "Learn more" on a finding explains its cause and fix; the [finding codes](/docs/findings/) page has every entry.
 
 :::note

@@ -12,7 +12,7 @@ Snellius is a read-only web UI for Kubernetes Gateway API, built for [kgateway](
 
 - **Is it healthy?** One health state per install, with problems ranked by severity.
 - **Why?** Every problem is a finding with a stable code, the evidence behind it and how to fix it.
-- **What does it manage?** Gateways, ListenerSets, routes and the policies attached to them.
+- **What does it manage?** Gateways, ListenerSets, routes and the policies that name them.
 
 Snellius runs in your cluster as one Deployment. It watches the Kubernetes API with `get`, `list` and `watch`, scrapes the kgateway controller's metrics, and never changes anything.
 
