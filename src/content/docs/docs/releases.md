@@ -7,16 +7,16 @@ This page covers the changes you see in the UI and in the chart. The [upgrade no
 
 ## v0.9.1
 
-- **Config accepted.** A Gateway's data plane reads "Config accepted" only when no proxy is warming up (KGWUI-025) or disconnected (KGWUI-026). Otherwise the overview reads **Unknown** and the Gateway page reads **Warning**. See [Gateways](/docs/explore/#gateways).
+- **Config accepted.** A Gateway's data plane reads "Config accepted" only when no proxy is warming up (KGWUI-025) or disconnected (KGWUI-026). When no proxy rejects config or has it withheld, but one is warming up or disconnected, the overview reads **Unknown** and the Gateway page reads **Warning**. See [Gateways](/docs/explore/#gateways).
 - No chart values or flags change. Upgrade with `--version 0.9.1`.
 
 ## v0.9.0: policies
 
 - **Policy pages.** Each install has a **Policies** tab, and each policy has its own page: targets as written, kgateway's status per ancestor, configuration by feature and the YAML. See [Policies](/docs/policies/).
-- **Policies on other pages.** Gateway, ListenerSet, route and backend pages list the policies that target them, that target a parent, and that kgateway reports attached there. An expanded listener row lists the policies that name that listener.
+- **Policies on other pages.** Gateway, ListenerSet, route and backend pages list the policies that target them. Depending on the kind, they also list the policies that target a parent, or that kgateway reports attached there. An expanded listener row lists the policies that name that listener.
 - **Source tags.** Every policy value is tagged Declared, Reported, Inferred or Unknown.
 - **Not by precedence.** Snellius never says which policy applies or wins. The list is sorted by namespace and name.
-- **Rejected policies.** A policy that kgateway rejects now raises [KGWUI-002](/docs/findings/#kgwui-002) on kgateway 2.3, 2.4 and 2.5, instead of "Not yet processed" (KGWUI-003). A DirectResponse can raise KGWUI-002 too.
+- **Rejected policies.** A policy that kgateway rejects now raises [KGWUI-002](/docs/findings/#kgwui-002) on kgateway 2.3, 2.4 and 2.5, instead of "Not yet processed" (KGWUI-003). On 2.5, a policy whose target is not found raises [KGWUI-016](/docs/findings/#kgwui-016) instead. A DirectResponse can raise KGWUI-002 too.
 - **Saved finding links.** The ID of a policy's KGWUI-002 changes once, so a saved link to one answers `404`.
 - **Secure mode.** To see a policy's KGWUI-002, a restricted viewer now needs to read every object it rests on, such as the Gateway, not only the policy.
 - No chart values or flags change. Upgrade with `--version 0.9.0`.
