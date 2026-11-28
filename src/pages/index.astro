@@ -9,6 +9,7 @@ import overview from "../assets/shots/overview-dark.png";
 import overviewFocus from "../assets/shots/overview-focus-dark.png";
 import route from "../assets/shots/route-focus-dark.png";
 import gateway from "../assets/shots/gateway-focus-dark.png";
+import policies from "../assets/shots/policies-focus-dark.png";
 
 const repo = "https://github.com/DuncanDoyle/snellius";
 const title = "Snellius: the observability UI for kgateway";
@@ -53,10 +54,19 @@ const features = [
   {
     eyebrow: "Explorer",
     title: "Every Gateway, listener and route",
-    text: "Browse Gateways, ListenerSets, routes and policies. Check listeners, proxies, conditions and what the controller built, and filter routes by status and reason. See which policies name each object, and what kgateway reports about them.",
+    text: "Browse Gateways, ListenerSets and routes. Check listeners, proxies, conditions and what the controller built, and filter routes by status and reason.",
     shot: gateway,
     alt: "A Gateway's listeners: both healthy, with attached route counts that agree with the computed counts",
     href: "/docs/explore/",
+    wide: true,
+  },
+  {
+    eyebrow: "Policies",
+    title: "Which policies name what",
+    text: "See every policy with its targets as written, and what kgateway reports about it. Gateway, route and backend pages list the policies that name them. Snellius never claims which policy wins.",
+    shot: policies,
+    alt: "The Policies list: three policies accepted and reported attached, and one TrafficPolicy not accepted because its target route does not exist",
+    href: "/docs/policies/",
     wide: true,
   },
 ];
@@ -143,7 +153,7 @@ const features = [
       </section>
 
       {features.map((f, i) => (
-        <section class:list={["feature", "wrap", { flip: i % 2 === 1, wide: f.wide }]}>
+        <section class:list={["feature", "wrap", { flip: i % 2 === 1 && !f.wide, wide: f.wide }]}>
           <div class="feature-copy">
             <p class="eyebrow">{f.eyebrow}</p>
             <h2>{f.title}</h2>
